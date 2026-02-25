@@ -1,19 +1,19 @@
 package br.com.techbank.principal;
 
-import br.com.techbank.modelo.Conta;
-import br.com.techbank.modelo.ContaCorrente;
-import br.com.techbank.modelo.ContaPoupanca;
+import br.com.techbank.modelo.*;
 
 public class Main {
     public static void main(String[] args) {
-        //Conta conta = new Conta(1111, 2222,"Danilo");
-       // Conta conta2 = new Conta(1111, 3333,"Maria");
-        ContaCorrente contaCorrente = new ContaCorrente(1111, 4444,"Joao");
-        ContaPoupanca contaPoupanca = new ContaPoupanca(2222, 4444,"Danilo");
+       ContaCorrente cc = new ContaCorrente(1111, 2222, "Danilo");
+       cc.depositar(500);
 
-       contaCorrente.depositar(500);
-       contaCorrente.calcularTributos();
-       contaCorrente.imprimirConta();
+        SeguroDeVida seguroDeVida = new SeguroDeVida(42.0);
+        CalculadorDeImpostos calc = new CalculadorDeImpostos();
+
+        calc.register(cc);
+        calc.register(seguroDeVida);
+        System.out.println("Total de impostos recolhidos: R$ " + calc.getTotalImposto());
+
 
     }
 }
