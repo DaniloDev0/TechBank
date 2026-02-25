@@ -1,6 +1,6 @@
 package br.com.techbank.modelo;
 
-public class Conta {
+public abstract class Conta {
 
     private int agencia;
     private int numero;

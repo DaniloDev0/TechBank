@@ -14,6 +14,9 @@ public class Main {
        contaCorrente.depositar(500);
        contaCorrente.sacar(100);
        contaCorrente.imprimirConta();
+       contaPoupanca.depositar(500);
+       contaPoupanca.sacar(100);
+       contaPoupanca.imprimirConta();
 
 
     }
