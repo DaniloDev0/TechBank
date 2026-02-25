@@ -11,9 +11,9 @@ public class Main {
         ContaCorrente contaCorrente = new ContaCorrente(1111, 4444,"Joao");
         ContaPoupanca contaPoupanca = new ContaPoupanca(2222, 4444,"Danilo");
 
-       contaPoupanca.depositar(500);
-       contaPoupanca.renderJuros();
-       contaPoupanca.imprimirConta();
+       contaCorrente.depositar(500);
+       contaCorrente.sacar(100);
+       contaCorrente.imprimirConta();
 
 
     }
