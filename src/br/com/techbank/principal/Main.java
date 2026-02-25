@@ -12,12 +12,8 @@ public class Main {
         ContaPoupanca contaPoupanca = new ContaPoupanca(2222, 4444,"Danilo");
 
        contaCorrente.depositar(500);
-       contaCorrente.sacar(100);
+       contaCorrente.calcularTributos();
        contaCorrente.imprimirConta();
-       contaPoupanca.depositar(500);
-       contaPoupanca.sacar(100);
-       contaPoupanca.imprimirConta();
-
 
     }
 }
