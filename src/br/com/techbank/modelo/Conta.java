@@ -1,5 +1,7 @@
 package br.com.techbank.modelo;
 
+import br.com.techbank.excecao.SaldoInsuficienteException;
+
 public abstract class Conta {
 
     private int agencia;
@@ -38,28 +40,24 @@ public abstract class Conta {
     }
 
     public void depositar(double valor) {
-        if (valor > 0) {
-            this.saldo += valor;
-        }else  {
-            System.out.println("Valor invalido");
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor do deposito é invalido.");
         }
+        this.saldo += valor;
     }
 
     public void sacar(double valor) {
-        if (valor > 0 && this.saldo >= valor) {
-            this.saldo -= valor;
-        }else   {
-            System.out.println("Valor invalido");
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor do saque deve ser maior que zero.");
         }
-
+        if (this.saldo < valor) {
+            throw new SaldoInsuficienteException("Saldo insuficiente. Seu saldo atual é: R$ " + this.saldo);
+        }
+        this.saldo -= valor;
     }
 
     public void transferir(double valor, Conta destino) {
-        if (valor > 0 && this.saldo >= valor) {
-            this.sacar(valor);
-            destino.depositar(valor);
-        } else {
-            System.out.println("Erro na transferência: Saldo insuficiente.");
-        }
+        this.sacar(valor);
+        destino.depositar(valor);
     }
 }
