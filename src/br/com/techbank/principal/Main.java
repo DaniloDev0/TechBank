@@ -7,13 +7,14 @@ public class Main {
 
         Banco techBank = new Banco("TechBank");
         ContaCorrente cc = new ContaCorrente(1111, 2222, "Danilo");
-        ContaCorrente cc2 = new ContaCorrente(1111, 3333, "Teste");
+        ContaCorrente cc2 = new ContaCorrente(1111, 3333, "Maria");
 
+        //cc.depositar(500);
         techBank.adicionarConta(cc);
         techBank.adicionarConta(cc2);
+        techBank.realizarPix(2222,3333,150);
 
-        Conta contaAchada = techBank.buscarContaPorNumero(9999);
-        System.out.println("Achei a conta do: " + contaAchada.getTitular());
+        techBank.exibirContas();
 
 
     }

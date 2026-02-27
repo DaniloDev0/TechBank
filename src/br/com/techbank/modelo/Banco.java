@@ -41,4 +41,10 @@ public class Banco {
         }
         throw new ContaNaoEncontradaException("Nenhuma conta encontrada com o número: " + numero);
     }
+
+    public void realizarPix(int numeroOrigem,  int numeroDestino, double valor) {
+        Conta contaOrigem = buscarContaPorNumero(numeroOrigem);
+        Conta contaDestino = buscarContaPorNumero(numeroDestino);
+        contaOrigem.transferir(valor, contaDestino);
+    }
 }
