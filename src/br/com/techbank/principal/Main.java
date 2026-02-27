@@ -1,21 +1,20 @@
 package br.com.techbank.principal;
 
-import br.com.techbank.modelo.*;
+import br.com.techbank.conexao.ConnectionFactory;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        Banco techBank = new Banco("TechBank");
-        ContaCorrente cc = new ContaCorrente(1111, 2222, "Danilo");
-        ContaCorrente cc2 = new ContaCorrente(1111, 3333, "Maria");
+        System.out.println("Testando a conexão com o banco de dados...");
 
-        //cc.depositar(500);
-        techBank.adicionarConta(cc);
-        techBank.adicionarConta(cc2);
-        techBank.realizarPix(2222,3333,150);
+        ConnectionFactory fabrica = new ConnectionFactory();
+        Connection conexao = fabrica.recuperarConexao();
 
-        techBank.exibirContas();
+        System.out.println("Conexão aberta com sucesso! O Java entrou no MySQL!");
 
-
+        // Regra de ouro: abriu a porta, tem que fechar depois!
+        conexao.close();
     }
 }
