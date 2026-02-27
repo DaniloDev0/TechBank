@@ -1,5 +1,7 @@
 package br.com.techbank.modelo;
 
+import br.com.techbank.excecao.ContaNaoEncontradaException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +31,14 @@ public class Banco {
         for (Conta conta : this.contas) {
             conta.imprimirConta();
         }
+    }
+
+    public Conta buscarContaPorNumero(int numero) {
+        for (Conta conta : this.contas) {
+            if (conta.getNumero() == numero) {
+                return conta;
+            }
+        }
+        throw new ContaNaoEncontradaException("Nenhuma conta encontrada com o número: " + numero);
     }
 }
