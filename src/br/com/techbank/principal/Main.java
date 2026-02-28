@@ -2,25 +2,30 @@ package br.com.techbank.principal;
 
 import br.com.techbank.conexao.ConnectionFactory;
 import br.com.techbank.dao.ContaDAO;
-import br.com.techbank.modelo.ContaCorrente;
+import br.com.techbank.modelo.Conta;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        // 1. Abre a conexão
+        // 1. Abre a porta do cofre
         ConnectionFactory fabrica = new ConnectionFactory();
         Connection conexao = fabrica.recuperarConexao();
 
-        // 2. Cria a cliente (que só existe na memória RAM por enquanto)
-        ContaCorrente contaDaMaria = new ContaCorrente(1111, 3333, "Maria (Gerente)");
-        contaDaMaria.depositar(500.0);
-
+        // 2. Chama o DAO e pede para ele trazer todo mundo do MySQL
         ContaDAO dao = new ContaDAO(conexao);
-        dao.salvar(contaDaMaria);
+        List<Conta> clientesDoBanco = dao.listarTodas();
 
-        // 4. Fecha a porta
+        // 3. Imprime no console para provar que o Java conseguiu ler o banco físico!
+        System.out.println("--- CLIENTES RESGATADOS DO DISCO RÍGIDO ---");
+        for (Conta conta : clientesDoBanco) {
+            conta.imprimirConta();
+            System.out.println("-------------------------");
+        }
+
+        // 4. Tranca a porta
         conexao.close();
     }
 }
