@@ -76,4 +76,44 @@ public class ContaDAO {
         }
     }
 
+    public void atualizar(Conta conta) {
+        String sql = "UPDATE contas SET saldo = ? WHERE numero = ?";
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            // 1. Trocamos a primeira interrogação pelo novo saldo
+            ps.setDouble(1, conta.getSaldo());
+            // 2. Trocamos a segunda interrogação pelo número da conta que queremos alterar
+            ps.setInt(2, conta.getNumero());
+
+            ps.execute();
+            ps.close();
+
+            System.out.println("Saldo da conta " + conta.getNumero() + " atualizado com sucesso no MySQL!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar a conta no banco", e);
+        }
+    }
+
+    public void deletar(int numeroConta) {
+        // "Delete da tabela contas ONDE o número for igual a X"
+        String sql = "DELETE FROM contas WHERE numero = ?";
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            // Trocamos a interrogação pelo número da conta que queremos apagar
+            ps.setInt(1, numeroConta);
+
+            ps.execute();
+            ps.close();
+
+            System.out.println("Conta número " + numeroConta + " encerrada e apagada do banco com sucesso!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao apagar a conta no banco", e);
+        }
+    }
 }
